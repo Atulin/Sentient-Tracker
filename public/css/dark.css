@@ -68,6 +68,14 @@ footer {
     height: 20px; }
   footer > .buttons {
     margin: 0 0.5rem; }
+  footer > .github {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    footer > .github > img {
+      height: 24px;
+      margin: 8px;
+      filter: invert(0.5) sepia(1); }
 
 a {
   color: #dcd5ba;

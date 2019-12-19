@@ -6,13 +6,13 @@ export function getData(db: Database) {
     axios.get('http://content.warframe.com/dynamic/worldState.php')
         .then((res) => {
             let value = res.data.Tmp.replace('\\', '');
-            let insert = value === [] ? null : LOCATIONS[parseInt(JSON.parse(value).sfn)];
+            let insert = value === '[]' ? null : LOCATIONS[parseInt(JSON.parse(value).sfn)];
 
             db.serialize(() => {
                 db.get("SELECT result FROM data ORDER BY time DESC LIMIT 1", (e, row) => {
-                    console.log(insert, row.result);
+                    console.log(insert || null, row?.result);
 
-                    if (insert !== row.result) {
+                    if (insert !== row?.result) {
                         const stmt = db.prepare("INSERT INTO data VALUES (?, ?)");
                         stmt.run([Date.now(), insert]);
                         stmt.finalize();

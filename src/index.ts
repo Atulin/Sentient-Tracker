@@ -17,6 +17,7 @@ app.listen(PORT, () => {
 // Home
 app.get('/', (req: Request, res: Response) => {});
 app.get('/api', (req: Request, res: Response) => res.sendFile('api.html', {root: __dirname+'/../public'}));
+app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
 
 // API
 app.get('/api/get/:num', (req: Request, res: Response) => {
