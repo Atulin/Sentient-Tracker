@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentient Tracker</title>
+
+    <link id="theme" rel="stylesheet" href="css/light.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/dayjs"></script>
+</head>
+<body>
+<div id="content">
+    <div class="entries" id="app">
+        <div v-for="e in entries" class="entry">
+            <div class="time">{{ new dayjs(e.time).format('DD MMM YYYY, HH:mm:ss (UTCZ)') }}</div>
+            <div class="location">{{ e.result || "Went dark" }}</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <a href="/api">API reference</a>
+    <hr>
+    <span>Theme</span>
+    <div class="buttons">
+        <button class="theme" data-theme="dark">Dark</button>
+        <button class="theme" data-theme="light">Light</button>
+    </div>
+</footer>
+
+</body>
+<script src="js/theme.js"></script>
+<script src="js/main.js"></script>
+</html>

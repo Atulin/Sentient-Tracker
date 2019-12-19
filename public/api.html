@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentient Tracker – API reference</title>
+
+    <link id="theme" rel="stylesheet" href="css/light.css">
+
+</head>
+<body>
+<div id="content">
+    <div class="textblock">
+        This API shows all changes in location of the ship and the time when they occurred. It's meant to be a simple
+        wrapper over the WorldState API that shows only the relevant information. Results are updated once a minute.
+    </div>
+    <div class="textblock">
+        There's only one route: <code>/api/get/:num</code>
+        <br>
+        The <code>:num</code> parameter can be left out, in which case it'll return just one result.
+        The maximum number of results returned is 50.
+    </div>
+    <div class="textblock">
+        Sample result:
+        <pre>
+[
+  {
+    "time": 1576725491758,
+    "result": "Gian Point"
+  },
+  {
+    "time": 1576725431477,
+    "result": null
+  },
+  {
+    "time": 1576725371490,
+    "result": "H-2 Cloud"
+  },
+  {
+    "time": 1576725311487,
+    "result": null
+  },
+  {
+    "time": 1576725251494,
+    "result": "Ganalen's Grave"
+  }
+]
+        </pre>
+        <a href="/api/get/10">Sample call with 10 results</a>
+    </div>
+    <div class="textblock">
+        <code>time</code> is a UNIX timestamp.
+    </div>
+</div>
+
+<footer>
+    <a href="/">Home</a>
+    <hr>
+    <span>Theme</span>
+    <div class="buttons">
+        <button class="theme" data-theme="dark">Dark</button>
+        <button class="theme" data-theme="light">Light</button>
+    </div>
+</footer>
+
+</body>
+<script src="js/theme.js"></script>
+</html>

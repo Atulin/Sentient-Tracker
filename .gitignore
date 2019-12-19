@@ -182,3 +182,6 @@ dist
 
 # NPM
 /package-lock.json
+
+# SASS cache
+/public/css/.sass-cache/
