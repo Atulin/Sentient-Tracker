@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {Database} from "sqlite3";
 import {LOCATIONS} from "./config/constants";
+import SocketIO from "socket.io";
 
-export function getData(db: Database) {
+export function getData(db: Database, socket: SocketIO.Socket) {
     axios.get('http://content.warframe.com/dynamic/worldState.php')
         .then((res) => {
             let value = res.data.Tmp.replace('\\', '');
@@ -13,8 +14,12 @@ export function getData(db: Database) {
                     console.log(insert || null, row?.result);
 
                     if (insert !== row?.result) {
+                        let event = {time: Date.now(), location: insert};
+
+                        socket.emit('event', event);
+
                         const stmt = db.prepare("INSERT INTO data VALUES (?, ?)");
-                        stmt.run([Date.now(), insert]);
+                        stmt.run([event.time, event.location]);
                         stmt.finalize();
                     }
                 });

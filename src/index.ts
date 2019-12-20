@@ -1,20 +1,29 @@
 import express, {Request, Response} from 'express';
 import sqlite from 'sqlite3';
-import {INTERVAL, PORT} from "./config/constants";
+import {INTERVAL, PORT, WSPORT} from "./config/constants";
 import {getData} from "./apiHandler";
+import SocketIO from "socket.io";
 
+// Setup SQLite
 const db = new sqlite.Database('db');
 db.run("CREATE TABLE IF NOT EXISTS data (time TIMESTAMP, result TEXT)");
 
+// Setup Express
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname+'/../public'));
 
-app.listen(PORT, () => {
+let server = app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
 
-// Home
+// Setup Websockets
+let io = require("socket.io").listen(server);
+io.on('connection', function(socket: SocketIO.Socket){
+    console.log('a user connected');
+});
+
+// Routes
 app.get('/', (req: Request, res: Response) => {});
 app.get('/api', (req: Request, res: Response) => res.sendFile('api.html', {root: __dirname+'/../public'}));
 app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
@@ -38,5 +47,9 @@ app.get('/api/get/:num', (req: Request, res: Response) => {
 // Poll the Warframe API
 setInterval(() => {
     console.log('Polling...');
-    getData(db);
+    getData(db, io);
 }, INTERVAL);
+
+// setInterval(() => {
+//     io.emit('test', {msg: 'lorem ipsum'});
+// }, 1000);

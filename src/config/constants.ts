@@ -1,5 +1,6 @@
-// Port to run on
+// Ports to run on
 export const PORT = process.env.PORT || 4000;
+export const WSPORT = process.env.WSPORT || 4001;
 
 // Job setup
 const minutes = 1;
