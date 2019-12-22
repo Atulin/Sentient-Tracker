@@ -10,8 +10,13 @@ db.run("CREATE TABLE IF NOT EXISTS data (time TIMESTAMP, result TEXT)");
 
 // Setup Express
 const app = express();
+const cors = require('cors');
 app.use(express.json());
-// app.use(express.static(__dirname+'/../public'));
+
+let corsOptions = {
+    origin: 'https://anomaly-tracker.netlify.com/',
+    optionsSuccessStatus: 200
+};
 
 let server = app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
@@ -24,12 +29,10 @@ io.on('connection', function(socket: SocketIO.Socket){
 });
 
 // Routes
-// app.get('/', (req: Request, res: Response) => {});
-// app.get('/api', (req: Request, res: Response) => res.sendFile('api.html', {root: __dirname+'/../public'}));
 app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
 
 // API
-app.get('/api/get/:num', (req: Request, res: Response) => {
+app.get('/api/get/:num', cors(corsOptions), (req: Request, res: Response) => {
     let num: number = Number(req.params.num ?? 1);
     num = num < 1 ? 1 : num;
     num = num > 50 ? 50 : num;
@@ -49,7 +52,3 @@ setInterval(() => {
     console.log('Polling...');
     getData(db, io);
 }, INTERVAL);
-
-// setInterval(() => {
-//     io.emit('test', {msg: 'lorem ipsum'});
-// }, 1000);
