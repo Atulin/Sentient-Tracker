@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 let corsOptions = {
-    origin: 'https://anomaly-tracker.netlify.com/',
+    origin: 'https://anomaly-tracker.netlify.com',
     optionsSuccessStatus: 200
 };
 
