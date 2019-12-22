@@ -3,6 +3,7 @@ import sqlite from 'sqlite3';
 import {INTERVAL, PORT, WSPORT} from "./config/constants";
 import {getData} from "./apiHandler";
 import SocketIO from "socket.io";
+import cors from 'cors';
 
 // Setup SQLite
 const db = new sqlite.Database('db');
@@ -10,7 +11,6 @@ db.run("CREATE TABLE IF NOT EXISTS data (time TIMESTAMP, result TEXT)");
 
 // Setup Express
 const app = express();
-const cors = require('cors');
 app.use(express.json());
 
 let corsOptions = {
