@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express';
 import sqlite from 'sqlite3';
 import {INTERVAL, PORT} from "./config/constants";
 import {getData} from "./apiHandler";
-import cors from 'cors';
+const cors = require('cors');
 
 // Setup SQLite
 const db = new sqlite.Database('db');
@@ -10,8 +10,8 @@ db.run("CREATE TABLE IF NOT EXISTS data (time TIMESTAMP, result TEXT)");
 
 // Setup Express
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 let server = app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
