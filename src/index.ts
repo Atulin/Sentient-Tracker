@@ -31,7 +31,7 @@ app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
 app.get('/api/get/:num', (req: Request, res: Response) => {
     let num: number = Number(req.params.num ?? 1);
     num = num < 1 ? 1 : num;
-    num = num > 50 ? 50 : num;
+    num = num > 200 ? 200 : num;
 
     let stmt = db.prepare("SELECT * FROM data ORDER BY time DESC LIMIT ?");
     stmt.all(num, (e, row) => {

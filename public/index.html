@@ -70,7 +70,7 @@
 </script>
 
 <script>
-    let socket = io('https://anomaly-tracker.glitch.me/');
+    let socket = io('http://155.138.228.215:4000/');
     socket.on('event', (x) => {
         Push.create("New event!", {
             body: x.location === null ? "The ship went dark." : `The ship appeared on ${x.location}`,
