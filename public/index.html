@@ -45,8 +45,8 @@
     <hr>
 
     <a href='https://ko-fi.com/H2H365N9' class="ico-link">
-        <span>Chip in for a better server</span>
-        <img src="assets/Server.svg" alt="Server rack icon">
+        <span>Donate $3 to run this for a month</span>
+        <img src="assets/Money.svg" alt="Money donation rack icon">
     </a>
 
 </footer>
@@ -72,6 +72,14 @@
 <script>
     let socket = io('http://155.138.228.215:8080/');
     socket.on('event', (x) => {
+        // Handle list
+        main.entries.pop();
+        main.entries.unshift({
+            time: x.time,
+            result: x.location,
+        });
+
+        // Handle notification
         Push.create("New event!", {
             body: x.location === null ? "The ship went dark." : `The ship appeared on ${x.location}`,
             icon: x.location === null ? "assets/sleep.png" : "assets/wake.png",
