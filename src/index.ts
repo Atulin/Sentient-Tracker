@@ -11,7 +11,7 @@ db.run("CREATE TABLE IF NOT EXISTS data (time TIMESTAMP, result TEXT)");
 // Setup Express
 const app = express();
 app.use(express.json());
-app.use(express.static(__dirname+'/../public'));
+// app.use(express.static(__dirname+'/../public'));
 
 let server = app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
@@ -24,8 +24,8 @@ io.on('connection', function(socket: SocketIO.Socket){
 });
 
 // Routes
-app.get('/', (req: Request, res: Response) => {});
-app.get('/api', (req: Request, res: Response) => res.sendFile('api.html', {root: __dirname+'/../public'}));
+// app.get('/', (req: Request, res: Response) => {});
+// app.get('/api', (req: Request, res: Response) => res.sendFile('api.html', {root: __dirname+'/../public'}));
 app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
 
 // API

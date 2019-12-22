@@ -8,7 +8,7 @@ let main = new Vue({
     },
     methods: {
         fetchData() {
-            axios.get('/api/get/10')
+            axios.get('https://anomaly-tracker.glitch.me/api/get/10')
                 .then((res) => {
                     this.entries = res.data;
                 })
