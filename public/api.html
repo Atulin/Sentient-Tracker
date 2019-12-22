@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sentient Tracker – API reference</title>
 
     <link id="theme" rel="stylesheet" href="css/light.css">
@@ -14,7 +16,9 @@
         wrapper over the WorldState API that shows only the relevant information. Results are updated once a minute.
     </div>
     <div class="textblock">
-        There's only one route: <code>/api/get/:num</code>
+        API is served from <code>https://anomaly-tracker.glitch.me</code>
+        <br>
+        There's only one endpoint: <code>/api/get/:num</code>
         <br>
         The <code>:num</code> parameter can be left out, in which case it'll return just one result.
         The maximum number of results returned is 50.
@@ -45,7 +49,7 @@
   }
 ]
         </pre>
-        <a href="/api/get/10">Sample call with 10 results</a>
+        <a href="https://anomaly-tracker.glitch.me/api/get/10">Sample call with 10 results</a>
     </div>
     <div class="textblock">
         <code>time</code> is a UNIX timestamp.
@@ -65,10 +69,18 @@
 
     <hr>
 
-    <a href="https://github.com/Atulin/Sentient-Tracker" class="github">
+    <a href="https://github.com/Atulin/Sentient-Tracker" class="ico-link">
         <span>Source</span>
         <img src="assets/Github.svg" alt="Github logo">
     </a>
+
+    <hr>
+
+    <a href='https://ko-fi.com/H2H365N9' class="ico-link">
+        <span>Chip in for a better server</span>
+        <img src="assets/Server.svg" alt="Server rack icon">
+    </a>
+
 </footer>
 
 </body>
