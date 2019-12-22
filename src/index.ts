@@ -1,8 +1,7 @@
 import express, {Request, Response} from 'express';
 import sqlite from 'sqlite3';
-import {INTERVAL, PORT, WSPORT} from "./config/constants";
+import {INTERVAL, PORT} from "./config/constants";
 import {getData} from "./apiHandler";
-import SocketIO from "socket.io";
 import cors from 'cors';
 
 // Setup SQLite
@@ -24,11 +23,12 @@ let server = app.listen(PORT, () => {
 
 // Setup Websockets
 let io = require("socket.io").listen(server);
-io.on('connection', function(socket: SocketIO.Socket){
-    console.log('a user connected');
+io.on('connection', function(){
+    console.log('Websocket connection established.');
 });
 
 // Routes
+app.get('/', (req: Request, res: Response) => res.redirect('https://anomaly-tracker.netlify.com/'));
 app.get('/status', (req: Request, res: Response) => res.status(200).send('OK'));
 
 // API
